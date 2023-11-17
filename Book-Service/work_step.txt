@@ -1,0 +1,21 @@
+open terminal and must have to install docker 
+then run:
+    sudo docker pull postgres:alpine
+    sudo docker run --name postgres-fast -e POSTGRES_PASSWORD=pass123 -d -p 5432:5432 postgres:alpine
+    sudo docker exec -it fastapi-postgres bash
+    psql -U postgres
+    create database fastapi_database;
+    create user myuser with encrypted password 'pass123';
+    grant all privileges on database fastapi_database to myuser;
+    psql -h localhost -p 5432 postgres
+
+    in other terminal
+    docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' postgres-fast
+
+    now get the ip and paste in db_connect.py
+
+    sudo docker build . -t bookservice
+    sudo docker run -d -p 8000:8000 bookservice
+
+    open your browser and type
+    127.0.0.1:8000/docs
